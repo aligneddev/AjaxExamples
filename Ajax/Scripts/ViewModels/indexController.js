@@ -71,7 +71,7 @@ indexController.prototype.postDataWithAjax = function () {
 	});
 }
 
-
+// not working yet
 indexController.prototype.getWithJsonP = function () {
 	debugger;
 	// Typescript and ES6 helps avoid self = this with the () => 

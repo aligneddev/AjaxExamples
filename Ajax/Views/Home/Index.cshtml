@@ -1,43 +1,70 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<script src="~/Scripts/indexController.js"></script>
 
 <div class="row">
+    <h1>Plain JavaScript Ajax</h1>
+    <br />
     <div class="col-md-1">
-        <br/>
         <button id="makeGetAjaxCallButton">Make Get Ajax Call</button>
-        <br/>
-        <br/>
+    </div>
+    <div class="col-md-1">
         <button id="makePostAjaxCallButton">Post simple value</button>
-        <br/>
-        <br/>
+    </div>
+    <div class="col-md-1">
         <button id="makePostWithDataAjaxCallButton">Post With Data</button>
-        <br/>
-        <br/>
+    </div>
+    <div class="col-md-1">
         <button id="makeGetJsonPCallButton">Json P</button>
-        <br/>
+    </div>
+    <div class="col-md-1">
         <p id="resultArea">
 
         </p>
     </div>
 </div>
+<div id="knockoutArea" class="row">
+    <h1>Ajax with Knockout</h1>
+    <div class="col-md-1">
+        <button data-bind="click: getWithAjax">Make Get Ajax Call</button>
+    </div>
+    <div class="col-md-1">
+        <button data-bind="click: postWithAjax">Post simple value</button>
+    </div>
+    <div class="col-md-1">
+        <button data-bind="click: postDataWithAjax">Post With Data</button>
+    </div>
 
-<script type="text/javascript">
-    // http://youmightnotneedjquery.com/
-    // IE9+
-    function ready(fn) {
-        if (document.readyState !== 'loading') {
-            fn();
-        } else {
-            document.addEventListener('DOMContentLoaded', fn);
+    <div class="col-md-1">
+        <div data-bind="errorMessage" style="color: red;"></div>
+    </div>
+
+    <div class="col-md-1">
+        <ul data-bind="foreach: results">
+            <li>
+                <span data-bind="text:$data"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+@section scripts
+    {
+    <script type="text/javascript">
+        // http://youmightnotneedjquery.com/
+        // IE9+
+        function ready(fn) {
+            if (document.readyState !== 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
         }
-    }
-    ready(function () {
-        console.log('DOM is ready');
-        var button = document.querySelector("#makeGetAjaxCallButton");
-        var resultArea = document.querySelector("#resultArea");
-        //button.addEventListener('click', function() {
+
+        ready(function() {
+            console.log('DOM is ready');
+            var button = document.querySelector("#makeGetAjaxCallButton");
+            var resultArea = document.querySelector("#resultArea");
+            //button.addEventListener('click', function() {
             // get from the api on click
             // http://api.jquery.com/jQuery.ajax/
             //$.ajax({
@@ -70,10 +97,22 @@
 
             // JSON P
             // test resultArea.textContent = 'asdjfklsadjfklsda';
-       // });
+            // });
 
-        // with a class:
-        var controller = new indexController(button, document.querySelector("#makePostAjaxCallButton"), document.querySelector("#makePostWithDataAjaxCallButton"), document.querySelector("#makeGetJsonPCallButton"), resultArea);
-        console.log('id: ' + controller.id);
-    });
-</script>
+            // with a class:
+            var controller = new indexController(button, document.querySelector("#makePostAjaxCallButton"), document.querySelector("#makePostWithDataAjaxCallButton"), document.querySelector("#makeGetJsonPCallButton"), resultArea);
+            console.log('id: ' + controller.id);
+        });
+    </script>
+
+    @*Knockout example*@
+    <script type="text/javascript">
+        ready(function () {
+            var viewModel = new indexViewModel();
+            var div = document.querySelector("#knockoutArea");
+            // setup the data context at the knockoutArea div
+            ko.applyBindings(viewModel, div);
+        });
+
+    </script>
+}
