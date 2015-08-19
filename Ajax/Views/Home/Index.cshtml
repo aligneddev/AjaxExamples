@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/indexController.js"></script>
+
+<div class="row">
+    <div class="col-md-1">
+        <br/>
+        <button id="makeGetAjaxCallButton">Make Get Ajax Call</button>
+        <br/>
+        <br/>
+        <button id="makePostAjaxCallButton">Post simple value</button>
+        <br/>
+        <br/>
+        <button id="makePostWithDataAjaxCallButton">Post With Data</button>
+        <br/>
+        <br/>
+        <button id="makeGetJsonPCallButton">Json P</button>
+        <br/>
+        <p id="resultArea">
+
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // http://youmightnotneedjquery.com/
+    // IE9+
+    function ready(fn) {
+        if (document.readyState !== 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+    ready(function () {
+        console.log('DOM is ready');
+        var button = document.querySelector("#makeGetAjaxCallButton");
+        var resultArea = document.querySelector("#resultArea");
+        //button.addEventListener('click', function() {
+            // get from the api on click
+            // http://api.jquery.com/jQuery.ajax/
+            //$.ajax({
+            //    type: 'GET',
+            //    url: 'api/Stuff',
+            //    success: function (resp) {
+            //        for (var i = 0; i < resp.length; i++) {
+            //            debugger;
+            //            resultArea.textContent += '<br />' + resp[0];
+            //        }
+            //    },
+            //    error: function () {
+            //        self.resultArea.innerHTML = '<h1 style="color:red">error</h1>';
+            //        console.log('error');
+            //    }
+            //});
+
+            // with promises
+            //return $.ajax({
+            //    type: 'GET',
+            //    url: 'api/Stuff'
+            //}).then(function(resp) {
+            //    for (var i = 0; i < resp.length; i++) {
+            //        debugger;
+            //        resultArea.textContent += '<br />' + resp[0];
+            //    }
+            //}).fail(function() {
+            //    console.log('error from promise');
+            //});
+
+            // JSON P
+            // test resultArea.textContent = 'asdjfklsadjfklsda';
+       // });
+
+        // with a class:
+        var controller = new indexController(button, document.querySelector("#makePostAjaxCallButton"), document.querySelector("#makePostWithDataAjaxCallButton"), document.querySelector("#makeGetJsonPCallButton"), resultArea);
+        console.log('id: ' + controller.id);
+    });
+</script>
