@@ -2,6 +2,8 @@
  * A knockout view model for the index page.
  * @returns {} 
  */
+
+// see the typeScript version for an even better approach with the jQueryAjaxDataService
 function indexViewModel() {
 	// make observable so the UI will update
 	// that means we need to use parentheses

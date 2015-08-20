@@ -29,7 +29,8 @@ namespace Ajax
 
 			bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
 				"~/Scripts/knockout-3.3.0.debug.js",
-				"~/Scripts/ViewModels/*.js"
+				"~/Scripts/ViewModels/*.js",
+				"~/Scripts/Modules/*.js"
 				));
 		}
 	}

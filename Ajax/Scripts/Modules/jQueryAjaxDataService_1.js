@@ -1,0 +1,109 @@
+﻿//http://api.jquery.com/deferred.promise/
+//	Example using the jQuery $.ajax method.
+
+// left to compare it against the Typescript version
+/**
+ * A data service using $.ajax from jQuery.
+ * @param  $ jQuery is required.
+ */
+jQueryAjaxDataService = (function ($, window, loginUrl) {
+	'use strict';
+	this.loginUrl = loginUrl ? loginUrl : "/Home/Login?ReturnUrl=";
+	/**
+	 * Wrap calls with this method to have a common way to handle errors. @param errorMessage The error message.
+	 */
+	var commonFailHandling = function (errorMessage) {
+		// User notification could be done in the global window.onerror call
+		throw new Error(errorMessage);
+	},
+/**
+ * dynamically download the javascript, only cache if it isn't going to change @param url The url for the request.
+ * @param cache bool to cache the request. @param success The callback to call on success.
+ */
+ajaxGetJson = function (url, cache) {
+	// @param fail The callback to call on failure (400 or 500 errors from the service). 
+	$.ajax({
+		type: "GET",
+		url: url,
+		dataType: "json",
+		accepts: {
+			json: "application/json"
+		},
+		cache: cache === undefined ? false : cache,
+		statusCode: {
+			401: function () {
+				// un-authorized, the session timed out
+				// re-direct to the login page
+				window.location = this.loginUrl + window.location.pathname;
+			}
+		}
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		// textStatus: "timeout", "error", "abort", "parsererror"
+		var errorMessage = jqXHR.responseText + " " + textStatus + ": " + errorThrown;
+		if (fail !== undefined) {
+			fail(errorMessage);
+		} else {
+			commonFailHandling(errorMessage);
+		}
+	});
+},
+/**
+ * Post the JSON data to the url. @param url The url to post to.
+ * @param data The JSON data to post. 
+ */
+ajaxPostJson = function (url, data) {
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: data,
+		dataType: "json",
+		statusCode: {
+			401: function () {
+				// un-authorized, the session timed out
+				// re-direct to the login page
+				window.location = "/Home/Login?ReturnUrl=" + window.location.pathname;
+			}
+		}
+	}).then(function (result, textStatus) {
+		if (success !== undefined) {
+			success(result, textStatus);
+		}
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		// textStatus: "timeout", "error", "abort", "parsererror"
+		var errorMessage = jqXHR.responseText + " " + textStatus + ": " + errorThrown;
+		if (fail !== undefined) {
+			fail(errorMessage);
+		} else {
+			commonFailHandling(errorMessage);
+		}
+	});
+},
+	/**
+	 * dynamically download the javascript, only cache if it isn't going to change @param url The url for the request.
+	 * @param cache bool to cache the request. @param success The callback to call on success.
+	 */
+ajaxGetScript = function (url, cache) {
+	return $.ajax({
+		type: 'GET',
+		url: url,
+		dataType: 'script',
+		cache: cache
+	}).then(function (data) {
+
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		// textStatus: "timeout", "error", "abort", "parsererror"
+		var errorMessage = jqXHR.responseText + " " + textStatus + ": " + errorThrown;
+		if (fail !== undefined) {
+			fail(errorMessage);
+		} else {
+			commonFailHandling(errorMessage);
+		}
+	});
+};
+	return {
+		AjaxGetScript: ajaxGetScript,
+		AjaxGetJson: ajaxGetJson,
+		AjaxPostJson: ajaxPostJson,
+		CommonFailHandling: commonFailHandling
+	};
+}(window, $));
