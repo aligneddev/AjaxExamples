@@ -222,7 +222,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Modules\jQueryAjaxDataService_1.js" />
+    <None Include="Scripts\Modules\jQueryAjaxDataService_1.oldjs" />
     <Content Include="Scripts\ViewModels\indexController.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -287,6 +287,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Modules\jQueryAjaxDataService.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\ViewModels\indexTsViewModel.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

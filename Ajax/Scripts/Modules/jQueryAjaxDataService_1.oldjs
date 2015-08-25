@@ -6,9 +6,9 @@
  * A data service using $.ajax from jQuery.
  * @param  $ jQuery is required.
  */
-jQueryAjaxDataService = (function ($, window, loginUrl) {
+jQueryAjaxDataService_1 = (function ($, window) {
 	'use strict';
-	this.loginUrl = loginUrl ? loginUrl : "/Home/Login?ReturnUrl=";
+	this.loginUrl =  "/Home/Login?ReturnUrl=";
 	/**
 	 * Wrap calls with this method to have a common way to handle errors. @param errorMessage The error message.
 	 */

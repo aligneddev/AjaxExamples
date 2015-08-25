@@ -2,6 +2,37 @@
     ViewBag.Title = "Home Page";
 }
 
+<div id="knockoutAreaWithTS" class="row">
+    <h1>Ajax with Knockout and TypeScript</h1>
+    <div class="col-md-1">
+        <button data-bind="click: getWithAjax">Make Get Ajax Call</button>
+    </div>
+    <div class="col-md-1">
+        <label>id</label>
+        <input data-bind="value: id"/>
+        <br/>
+        <label>name</label>
+        <input data-bind="value:name"/>
+        <br/>
+        <br/>
+        <button data-bind="click: postDataWithAjax">Post With Data</button>
+    </div>
+
+    <div class="col-md-1">
+        <div data-bind="errorMessage" style="color: red;"></div>
+    </div>
+
+    <div class="col-md-1">
+        <ul data-bind="foreach: results">
+            <li>
+                <span data-bind="text:$data"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
 <div class="row">
     <h1>Plain JavaScript Ajax</h1>
     <br />
@@ -47,6 +78,7 @@
         </ul>
     </div>
 </div>
+
 @section scripts
     {
     <script type="text/javascript">
@@ -112,6 +144,10 @@
             var div = document.querySelector("#knockoutArea");
             // setup the data context at the knockoutArea div
             ko.applyBindings(viewModel, div);
+
+            var typeScriptVm = new IndexTsViewModel(new JQueryAjaxDataService($));
+            var tsDiv = document.querySelector("#knockoutAreaWithTS");
+            ko.applyBindings(typeScriptVm, tsDiv);
         });
 
     </script>
