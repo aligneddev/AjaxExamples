@@ -1,6 +1,6 @@
 ﻿/// <reference path="../typings/knockout.d.ts" />
 // http://stackoverflow.com/questions/30173638/where-to-specify-module-flag-in-vs-2015
-
+// write up on import http://geekswithblogs.net/Aligned/archive/2015/09/02/vs-2015-and-typescript-module-flag.aspx
 import {JQueryAjaxDataService} from"../Modules/jQueryAjaxDataService";
 
  /**

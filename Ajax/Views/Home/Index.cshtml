@@ -145,6 +145,7 @@
             // setup the data context at the knockoutArea div
             ko.applyBindings(viewModel, div);
 
+            // write up on import http://geekswithblogs.net/Aligned/archive/2015/09/02/vs-2015-and-typescript-module-flag.aspx
             // need to make sure indexTSViewModel is available first
             require(['Scripts/ViewModels/indexTsViewModel', 'Scripts/modules/jQueryAjaxDataService'],
                 function (IndexTsViewModel, JQueryAjaxDataService) {
