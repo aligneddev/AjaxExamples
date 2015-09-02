@@ -52,7 +52,7 @@ ajaxGetJson = function (url, cache) {
  * @param data The JSON data to post. 
  */
 ajaxPostJson = function (url, data) {
-	$.ajax({
+	return $.ajax({
 		type: "POST",
 		url: url,
 		data: data,

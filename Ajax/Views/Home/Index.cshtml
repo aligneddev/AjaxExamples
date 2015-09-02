@@ -9,12 +9,12 @@
     </div>
     <div class="col-md-1">
         <label>id</label>
-        <input data-bind="value: id"/>
-        <br/>
+        <input data-bind="value: id" />
+        <br />
         <label>name</label>
-        <input data-bind="value:name"/>
-        <br/>
-        <br/>
+        <input data-bind="value:name" />
+        <br />
+        <br />
         <button data-bind="click: postDataWithAjax">Post With Data</button>
     </div>
 
@@ -30,9 +30,9 @@
         </ul>
     </div>
 </div>
-<br/>
-<br/>
-<br/>
+<br />
+<br />
+<br />
 <div class="row">
     <h1>Plain JavaScript Ajax</h1>
     <br />
@@ -80,7 +80,7 @@
 </div>
 
 @section scripts
-    {
+{
     <script type="text/javascript">
         // http://youmightnotneedjquery.com/
         // IE9+
@@ -145,9 +145,13 @@
             // setup the data context at the knockoutArea div
             ko.applyBindings(viewModel, div);
 
-            var typeScriptVm = new IndexTsViewModel(new JQueryAjaxDataService($));
-            var tsDiv = document.querySelector("#knockoutAreaWithTS");
-            ko.applyBindings(typeScriptVm, tsDiv);
+            // need to make sure indexTSViewModel is available first
+            require(['Scripts/ViewModels/indexTsViewModel', 'Scripts/modules/jQueryAjaxDataService'],
+                function (IndexTsViewModel, JQueryAjaxDataService) {
+                    var typeScriptVm = new IndexTsViewModel.IndexTsViewModel(new JQueryAjaxDataService.JQueryAjaxDataService($));
+                    var tsDiv = document.querySelector("#knockoutAreaWithTS");
+                    ko.applyBindings(typeScriptVm, tsDiv);
+                });
         });
 
     </script>

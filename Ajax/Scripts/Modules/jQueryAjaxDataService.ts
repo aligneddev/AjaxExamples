@@ -1,6 +1,6 @@
 ﻿// if we had modules and jQuery hooked up..., import $ = require("jquery");
 // TypeScript, instead of functions for classes
-class JQueryAjaxDataService {
+export class JQueryAjaxDataService {
     constructor(private $: JQuery, private loginUrl = "/Home/Login?ReturnUrl=") {
 
     }
@@ -20,23 +20,11 @@ class JQueryAjaxDataService {
      * @returns {} 
      */
     public ajaxGetJson(url: string, cache?: boolean) {
-        var self = this;
-        $.ajax({
+        return $.ajax({
             type: "GET",
             url: url,
             dataType: "json",
-            accepts: {
-                json: "application/json"
-            },
             cache: cache === undefined ? false : cache,
-            statusCode: {
-                401: function () {
-                    // un-authorized, the session timed out
-                    // re-direct to the login page
-                    // this needs to be tested
-                    window.location.href = self.loginUrl + window.location.pathname;
-                }
-            }
         }).fail((jqXhr, textStatus, errorThrown) => {
             // textStatus: "timeout", "error", "abort", "parsererror"
             var errorMessage = jqXhr.responseText + " " + textStatus + ": " + errorThrown;
@@ -67,9 +55,9 @@ class JQueryAjaxDataService {
 
     public ajaxGetScript(url: string, cache?: boolean) {
         return $.ajax({
-            type: 'GET',
+            type: "GET",
             url: url,
-            dataType: 'script',
+            dataType: "script",
             cache: cache
         }).fail((jqXhr, textStatus, errorThrown) => {
             // textStatus: "timeout", "error", "abort", "parsererror"
